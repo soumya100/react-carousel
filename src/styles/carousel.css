@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+:root {
+  --color-carousel-accent: #2563eb;
+  --color-carousel-accent-fg: #ffffff;
+  --color-carousel-muted: #f1f5f9;
+  --color-carousel-muted-fg: #64748b;
+  --color-carousel-border: #e2e8f0;
+  --color-carousel-bg: #ffffff;
+  --color-carousel-fg: #0f172a;
+  --color-carousel-error: #ef4444;
+  --color-carousel-error-fg: #ffffff;
+
+  --radius-carousel: 0.5rem;
+  --duration-carousel: 500ms;
+}
