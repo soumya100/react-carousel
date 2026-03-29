@@ -1,6 +1,18 @@
 // Components
-export { default } from './components/Carousel';
+export { default, Carousel } from './components/Carousel';
 export { default as AccordionCarousel } from './components/AccordionCarousel';
+export type {
+  CarouselProps,
+  ResponsiveConfig,
+  NavButtonRenderProps,
+  DotsRenderProps,
+} from './components/Carousel';
+export type {
+  AccordionCarouselProps,
+  AccordionResponsiveConfig,
+  ExpandButtonRenderProps,
+  AccordionDotsRenderProps,
+} from './components/AccordionCarousel';
 export { NavButton } from './components/NavButton';
 export { CarouselDots } from './components/CarouselDots';
 export { LazySlide } from './components/LazySlide';
@@ -15,5 +27,5 @@ export { useVisibleSlides } from './hooks/useVisibleSlides';
 // Utils
 export { cn } from './utils/cn';
 
-// CSS — consuming app imports once: import '@your-org/carousel/styles'
+// CSS - consuming app imports once: import '@your-org/carousel/styles'
 import './styles/carousel.css';

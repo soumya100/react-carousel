@@ -14,7 +14,7 @@ const config = defineConfig({
 
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.js'),
+      entry: resolve(__dirname, 'src/index.ts'),
       name: 'Carousel',
       formats: ['es', 'cjs'],
       fileName: (format) =>
@@ -24,6 +24,7 @@ const config = defineConfig({
     rollupOptions: {
       external: ['react', 'react-dom', 'react/jsx-runtime'],
       output: {
+        exports: 'named',
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',

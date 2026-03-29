@@ -11,7 +11,7 @@ import { cn } from '../utils/cn';
 
 type CarouselStatus = 'success' | 'loading' | 'error';
 
-interface ResponsiveConfig {
+export interface ResponsiveConfig {
   xs?: number;
   sm?: number;
   md?: number;
@@ -19,18 +19,18 @@ interface ResponsiveConfig {
   xl?: number;
 }
 
-interface NavButtonRenderProps {
+export interface NavButtonRenderProps {
   onClick: () => void;
   disabled: boolean;
 }
 
-interface DotsRenderProps {
+export interface DotsRenderProps {
   totalPages: number;
   activePage: number;
   onPageChange: (idx: number) => void;
 }
 
-interface CarouselProps<T = unknown> {
+export interface CarouselProps<T = unknown> {
   // Data
   items?: T[];
   renderItem: (item: T, idx: number) => ReactNode;
@@ -266,9 +266,12 @@ function CarouselComponent<T = unknown>({
             const isClone =
               idx < visibleSlides ||
               idx >= extendedItems.length - visibleSlides;
+            const uniqueKey = isClone
+              ? `${getItemKey(item as T, idx)}-clone-${idx}`
+              : getItemKey(item as T, idx);
             return (
               <div
-                key={getItemKey(item as T, idx)}
+                key={uniqueKey}
                 className={cn('shrink-0 box-border p-1', slideClassName)}
                 style={{ width: slideWidth }}
                 aria-hidden={isClone ? 'true' : undefined}
@@ -312,11 +315,7 @@ function CarouselComponent<T = unknown>({
   );
 }
 
-const Carousel = memo(CarouselComponent, (prev, next) =>
-  prev.items === next.items &&
-  prev.renderItem === next.renderItem &&
-  prev.status === next.status &&
-  prev.page === next.page
-) as typeof CarouselComponent;
+const Carousel = memo(CarouselComponent) as <T = unknown>(props: CarouselProps<T>) => JSX.Element;
 
 export default Carousel;
+export { Carousel };

@@ -22,9 +22,13 @@ export function CarouselSkeleton({
       {Array.from({ length: count }, (_, i) => (
         <div
           key={i}
-          style={{ animationDelay: `${i * 80}ms` }}
-          className="flex-1 min-w-0 h-32 rounded-[--radius-carousel] bg-[--color-carousel-muted] animate-pulse"
-        />
+          className="flex-1 min-w-0 h-32 rounded-[--radius-carousel] bg-[--color-carousel-muted] border border-[--color-carousel-border] relative overflow-hidden"
+        >
+          <div 
+            style={{ animationDelay: `${i * 200}ms` }}
+            className="absolute inset-0 bg-linear-to-r from-transparent via-[--color-carousel-bg]/60 to-transparent animate-[shimmer_2s_ease-in-out_infinite]"
+          />
+        </div>
       ))}
     </div>
   );

@@ -5,13 +5,13 @@ import { CarouselSkeleton } from './CarouselSkeleton';
 describe('CarouselSkeleton component', () => {
   it('should render with default count', () => {
     const { container } = render(<CarouselSkeleton />);
-    const skeletons = container.querySelectorAll('[class*="animate-pulse"]');
+    const skeletons = container.querySelectorAll('[class*="animate-"]');
     expect(skeletons).toHaveLength(5);
   });
 
   it('should render with custom count', () => {
     const { container } = render(<CarouselSkeleton count={3} />);
-    const skeletons = container.querySelectorAll('[class*="animate-pulse"]');
+    const skeletons = container.querySelectorAll('[class*="animate-"]');
     expect(skeletons).toHaveLength(3);
   });
 

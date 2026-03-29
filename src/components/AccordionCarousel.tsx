@@ -19,7 +19,7 @@ import { cn } from '../utils/cn';
 
 type CarouselStatus = 'success' | 'loading' | 'error';
 
-interface ResponsiveConfig {
+export interface AccordionResponsiveConfig {
   xs?: number;
   sm?: number;
   md?: number;
@@ -27,18 +27,18 @@ interface ResponsiveConfig {
   xl?: number;
 }
 
-interface ExpandButtonRenderProps {
+export interface ExpandButtonRenderProps {
   isExpanded: boolean;
   onClick: () => void;
 }
 
-interface DotsRenderProps {
+export interface AccordionDotsRenderProps {
   totalPages: number;
   activePage: number;
   onPageChange: (idx: number) => void;
 }
 
-interface AccordionCarouselProps<T = unknown> {
+export interface AccordionCarouselProps<T = unknown> {
   // Data
   items?: T[];
   renderItem: (item: T, idx: number) => ReactNode;
@@ -51,7 +51,7 @@ interface AccordionCarouselProps<T = unknown> {
   customError?: ReactNode;
 
   // Behaviour
-  responsiveSlides?: ResponsiveConfig;
+  responsiveSlides?: AccordionResponsiveConfig;
   infinite?: boolean;
   showDots?: boolean;
 
@@ -75,10 +75,10 @@ interface AccordionCarouselProps<T = unknown> {
 
   // Slot overrides
   renderExpandButton?: (props: ExpandButtonRenderProps) => ReactNode;
-  renderDots?: (props: DotsRenderProps) => ReactNode;
+  renderDots?: (props: AccordionDotsRenderProps) => ReactNode;
 }
 
-const DEFAULT_RESPONSIVE: ResponsiveConfig = {
+const DEFAULT_RESPONSIVE: AccordionResponsiveConfig = {
   xs: 1,
   sm: 2,
   md: 3,
@@ -268,13 +268,13 @@ function AccordionCarouselComponent<T = unknown>({
       aria-label={isExpanded ? 'Collapse carousel' : 'Expand carousel'}
       aria-expanded={isExpanded}
       className={cn(
-        'absolute top-1/2 right-0 -translate-y-1/2 z-10',
-        'flex items-center justify-center size-8 rounded-full',
-        'bg-[--color-carousel-bg] border border-[--color-carousel-border]',
-        'text-[--color-carousel-fg] shadow-sm',
-        'transition-opacity duration-150 hover:opacity-80',
+        'absolute top-1/2 right-4 -translate-y-1/2 z-10',
+        'flex items-center justify-center size-10 rounded-full',
+        'bg-blue-500 border border-blue-600',
+        'text-white shadow-lg',
+        'transition-all duration-150 hover:bg-blue-600 hover:scale-110',
         'focus-visible:outline-2 focus-visible:outline-offset-2',
-        'focus-visible:outline-[--color-carousel-accent]',
+        'focus-visible:outline-blue-500',
         expandButtonClassName
       )}
     >
@@ -315,7 +315,7 @@ function AccordionCarouselComponent<T = unknown>({
       aria-expanded={isExpanded}
       onKeyDown={handleKeyDown}
     >
-      {isScrollable &&
+      {items.length > 0 &&
         (renderExpandButton
           ? renderExpandButton({ isExpanded, onClick: toggleExpanded })
           : defaultExpandButton)}
@@ -335,20 +335,30 @@ function AccordionCarouselComponent<T = unknown>({
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
-          {slideItems.map((item, idx) => (
-            <div
-              key={getItemKey(item as T, idx)}
-              className={cn('shrink-0 box-border p-1', slideClassName)}
-              style={{ width: slideWidth }}
-            >
-              <SlideErrorBoundary
-                onError={onSlideError}
-                fallback={slideFallback}
+          {slideItems.map((item, idx) => {
+            const isUsingExtended = !isExpanded;
+            const isClone =
+              isUsingExtended &&
+              (idx < visibleSlides ||
+               idx >= slideItems.length - visibleSlides);
+            const uniqueKey = isClone
+              ? `${getItemKey(item as T, idx)}-clone-${idx}`
+              : getItemKey(item as T, idx);
+            return (
+              <div
+                key={uniqueKey}
+                className={cn('shrink-0 box-border p-1', slideClassName)}
+                style={{ width: slideWidth }}
               >
-                <LazySlide>{renderItem(item as T, idx)}</LazySlide>
-              </SlideErrorBoundary>
-            </div>
-          ))}
+                <SlideErrorBoundary
+                  onError={onSlideError}
+                  fallback={slideFallback}
+                >
+                  <LazySlide>{renderItem(item as T, idx)}</LazySlide>
+                </SlideErrorBoundary>
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -378,8 +388,6 @@ function AccordionCarouselComponent<T = unknown>({
   );
 }
 
-const AccordionCarousel = memo(
-  AccordionCarouselComponent
-) as typeof AccordionCarouselComponent;
+const AccordionCarousel = memo(AccordionCarouselComponent) as <T = unknown>(props: AccordionCarouselProps<T>) => JSX.Element;
 
 export default AccordionCarousel;
