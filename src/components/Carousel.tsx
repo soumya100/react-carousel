@@ -203,7 +203,12 @@ function CarouselComponent<T = unknown>({
       if (touchHandled.current) return;
       touchHandled.current = true;
       const delta = touchStartX.current - (e.changedTouches[0]?.clientX ?? 0);
-      if (Math.abs(delta) > 40) delta > 0 ? handleNext() : handlePrev();
+      if (Math.abs(delta) <= 40) return;
+      if (delta > 0) {
+        handleNext();
+        return;
+      }
+      handlePrev();
     },
     [handleNext, handlePrev]
   );
@@ -257,7 +262,7 @@ function CarouselComponent<T = unknown>({
           ref={trackRef}
           className={cn('flex', trackClassName)}
           style={trackStyle as React.CSSProperties}
-          onTransitionEnd={handleTransitionEnd as any}
+          onTransitionEnd={handleTransitionEnd}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
           aria-live="off"

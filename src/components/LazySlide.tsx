@@ -1,5 +1,4 @@
 import React, { ReactNode, JSX } from 'react';
-import { cn } from '../utils/cn';
 
 interface LazySlideProps {
   children: ReactNode;

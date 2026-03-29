@@ -240,7 +240,12 @@ function AccordionCarouselComponent<T = unknown>({
       if (isExpanded || touchHandled.current) return;
       touchHandled.current = true;
       const delta = touchStartX.current - (e.changedTouches[0]?.clientX ?? 0);
-      if (Math.abs(delta) > 40) delta > 0 ? next() : prev();
+      if (Math.abs(delta) <= 40) return;
+      if (delta > 0) {
+        next();
+        return;
+      }
+      prev();
     },
     [isExpanded, next, prev]
   );
@@ -329,9 +334,7 @@ function AccordionCarouselComponent<T = unknown>({
               ? { width: '100%' }
               : collapsedTrackStyle) as React.CSSProperties
           }
-          onTransitionEnd={
-            isExpanded ? undefined : (handleTransitionEnd as any)
-          }
+          onTransitionEnd={isExpanded ? undefined : handleTransitionEnd}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >

@@ -1,4 +1,4 @@
-import { Component, ReactNode, ErrorInfo, JSX } from 'react';
+import { Component, ReactNode, ErrorInfo } from 'react';
 import { cn } from '../utils/cn';
 
 interface SlideErrorBoundaryProps {

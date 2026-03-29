@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, useMemo, RefObject } from 'react';
+import { useState, useRef, useCallback, useMemo, RefObject, TransitionEvent } from 'react';
 
 interface UseCarouselStateProps {
   items: unknown[];
@@ -21,7 +21,7 @@ interface UseCarouselStateReturn {
   next: () => void;
   prev: () => void;
   goToPage: (idx: number) => void;
-  handleTransitionEnd: (e: TransitionEvent) => void;
+  handleTransitionEnd: (e: TransitionEvent<HTMLDivElement>) => void;
 }
 
 /**
@@ -93,20 +93,23 @@ export function useCarouselState({
     [isTransitioning, realPageIndex, totalRealPages]
   );
 
-  const handleTransitionEnd = useCallback((e: TransitionEvent) => {
-    if (e.target !== trackRef.current) return;
-    if (!isInfinite) {
-      setIsTransitioning(false);
-      return;
-    }
-    setDisableTransition(true);
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        setDisableTransition(false);
+  const handleTransitionEnd = useCallback(
+    (e: TransitionEvent<HTMLDivElement>) => {
+      if (e.target !== trackRef.current) return;
+      if (!isInfinite) {
         setIsTransitioning(false);
+        return;
+      }
+      setDisableTransition(true);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setDisableTransition(false);
+          setIsTransitioning(false);
+        });
       });
-    });
-  }, [isInfinite]);
+    },
+    [isInfinite]
+  );
 
   return {
     trackRef,

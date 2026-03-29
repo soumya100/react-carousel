@@ -37,8 +37,8 @@
     "prepublishOnly": "npm run lint && npm run typecheck && npm run test && npm run build"
   },
   "peerDependencies": {
-    "react": ">=19",
-    "react-dom": ">=19",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
     "tailwindcss": ">=4"
   },
   "dependencies": {
@@ -54,8 +54,10 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^15.0.0",
     "@types/node": "^20.19.37",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.57.2",
+    "@typescript-eslint/parser": "^8.57.2",
     "@vitejs/plugin-react": "^4.3.0",
     "@vitest/coverage-v8": "^2.0.0",
     "@vitest/ui": "^2.0.0",
@@ -64,8 +66,8 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "happy-dom": "^20.8.9",
     "jsdom": "^24.0.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
     "storybook": "^10.3.3",
     "tailwindcss": "^4.0.0",
     "typescript": "^5.6.0",

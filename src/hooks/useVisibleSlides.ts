@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 
 interface ResponsiveConfig {
   xs?: number;
@@ -42,13 +42,15 @@ export function useVisibleSlides(responsive: ResponsiveConfig): number {
     },
   }), [responsive.xs, responsive.sm, responsive.md, responsive.lg, responsive.xl]);
 
-  const getMatch = (): number => {
-    if (typeof window === 'undefined') return responsive.xl ?? 5;
+  const fallbackSlides = responsive.xl ?? 5;
+
+  const getMatch = useCallback((): number => {
+    if (typeof window === 'undefined') return fallbackSlides;
     for (const bp of Object.values(breakpoints)) {
       if (window.matchMedia(bp.query).matches) return bp.slides;
     }
-    return responsive.xl ?? 5;
-  };
+    return fallbackSlides;
+  }, [breakpoints, fallbackSlides]);
 
   const [visibleSlides, setVisibleSlides] = useState<number>(getMatch);
 
@@ -71,7 +73,7 @@ export function useVisibleSlides(responsive: ResponsiveConfig): number {
         mql.removeEventListener('change', handler)
       );
     };
-  }, [breakpoints]);
+  }, [breakpoints, getMatch]);
 
   return visibleSlides;
 }
