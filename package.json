@@ -1,6 +1,6 @@
 {
   "name": "@soumyadeepnandi/carousel",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Production-grade responsive carousel - React 18 + Tailwind v4 + Radix UI",
   "author": "Soumyadeep Nandi <soumyadeep.nandi@gmail.com>",
   "license": "MIT",
