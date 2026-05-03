@@ -1,11 +1,11 @@
-# @react/carousel
+# @soumyadeep/react-carousel
 
-[![npm version](https://badge.fury.io/js/%40react%2Fcarousel.svg)](https://www.npmjs.com/package/@react/carousel)
+[![npm version](https://badge.fury.io/js/%40soumyadeep%2Fcarousel.svg)](https://www.npmjs.com/package/@soumyadeep/react-carousel)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Production-grade responsive carousel — React 18 + Tailwind v4 + Radix UI
 
-**[View Live Demo](https://react-carousel-demo.vercel.app) | [GitHub](https://github.com/soumya100/react-carousel) | [Report a Bug](https://github.com/soumya100/react-carousel/issues)**
+**[View Live Demo](https://vercel.com/soumya100s-projects/carousel-demo) | [GitHub](https://github.com/soumya100/react-carousel) | [Report a Bug](https://github.com/soumya100/react-carousel/issues)**
 
 ## ✨ Features
 
@@ -23,19 +23,19 @@ Production-grade responsive carousel — React 18 + Tailwind v4 + Radix UI
 ## 📦 Installation
 
 ```bash
-npm install @react/carousel
+npm install @soumyadeep/react-carousel
 # or
-yarn add @react/carousel
+yarn add @soumyadeep/react-carousel
 # or
-pnpm add @react/carousel
+pnpm add @soumyadeep/react-carousel
 ```
 
 ## 🛠️ Basic Usage
 
 ```tsx
 import React from 'react';
-import Carousel from '@react/carousel';
-import '@react/carousel/styles';
+import Carousel from '@soumyadeep/react-carousel';
+import '@soumyadeep/react-carousel/styles';
 
 const MyComponent = () => {
   const items = [
@@ -67,8 +67,8 @@ const MyComponent = () => {
 
 ```tsx
 import React, { useState } from 'react';
-import { AccordionCarousel } from '@react/carousel';
-import '@react/carousel/styles';
+import { AccordionCarousel } from '@soumyadeep/react-carousel';
+import '@soumyadeep/react-carousel/styles';
 
 const AccordionExample = () => {
   const [expanded, setExpanded] = useState(false);
