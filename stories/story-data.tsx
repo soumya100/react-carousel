@@ -169,9 +169,9 @@ export function renderDetailCard(item: SampleItem) {
   );
 }
 
-export function renderPossiblyBrokenCard(item: SampleItem) {
+export function renderFallbackPreviewCard(item: SampleItem) {
   if (item.broken) {
-    throw new Error(`Could not render ${item.title}`);
+    return <SlideFallbackCard />;
   }
 
   return renderDetailCard(item);

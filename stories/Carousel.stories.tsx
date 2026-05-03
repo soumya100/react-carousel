@@ -8,7 +8,7 @@ import {
   carouselArgDescriptions,
   renderDetailCard,
   renderImageCard,
-  renderPossiblyBrokenCard,
+  renderFallbackPreviewCard,
   sampleItems,
   type SampleItem,
 } from './story-data';
@@ -234,8 +234,15 @@ export const SlideErrorFallback: Story = {
       ...item,
       broken: index === 2,
     })),
-    renderItem: renderPossiblyBrokenCard,
-    slideFallback: <SlideFallbackCard />,
+    renderItem: renderFallbackPreviewCard,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Preview of how a fallback slide can look when one item cannot be rendered. Storybook does not intentionally throw here to avoid its runtime error overlay.',
+      },
+    },
   },
 };
 
