@@ -22,6 +22,7 @@ export function CarouselSkeleton({
       {Array.from({ length: count }, (_, i) => (
         <div
           key={i}
+          data-testid="carousel-skeleton-card"
           className={cn(
             'relative min-w-0 flex-1 overflow-hidden rounded-[calc(var(--radius-carousel)+0.25rem)]',
             'border border-slate-200 bg-slate-50/80 p-3 shadow-[0_12px_30px_-18px_rgba(15,23,42,0.28)]'
