@@ -1,2 +1,2 @@
 @import "tailwindcss";
-@import "../node_modules/@react/carousel/dist/carousel.css";
+@import "@soumyadeepnandi/carousel/styles";

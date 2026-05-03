@@ -274,7 +274,7 @@ function AccordionCarouselComponent<T = unknown>({
       aria-expanded={isExpanded}
       className={cn(
         'absolute top-1/2 right-4 -translate-y-1/2 z-10',
-        'flex items-center justify-center size-10 rounded-full',
+        'flex items-center justify-center w-10 h-10 rounded-full',
         'bg-blue-500 border border-blue-600',
         'text-white shadow-lg',
         'transition-all duration-150 hover:bg-blue-600 hover:scale-110',
@@ -308,7 +308,7 @@ function AccordionCarouselComponent<T = unknown>({
     <div
       ref={containerRef}
       className={cn(
-        'relative w-full outline-none',
+        'relative w-full overflow-hidden outline-none',
         'focus-visible:ring-2 focus-visible:ring-[--color-carousel-accent]',
         'focus-visible:ring-offset-2 rounded-[--radius-carousel]',
         className
@@ -350,7 +350,7 @@ function AccordionCarouselComponent<T = unknown>({
             return (
               <div
                 key={uniqueKey}
-                className={cn('shrink-0 box-border p-1', slideClassName)}
+                className={cn('shrink-0 box-border p-1 min-w-0', slideClassName)}
                 style={{ width: slideWidth }}
               >
                 <SlideErrorBoundary

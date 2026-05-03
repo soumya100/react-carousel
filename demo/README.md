@@ -1,6 +1,6 @@
-# @react/carousel Demo
+# @soumyadeep/carousel Demo
 
-A comprehensive demo showcasing the features of the @react/carousel package.
+A comprehensive demo showcasing the features of the @soumyadeep/carousel package.
 
 ## Features Demonstrated
 
@@ -28,7 +28,7 @@ A comprehensive demo showcasing the features of the @react/carousel package.
 
 ## Package Features
 
-This demo uses the local @react/carousel package with the following features:
+This demo uses the local @soumyadeep/carousel package with the following features:
 
 - **React 19** compatible
 - **TypeScript** support with strict typing
@@ -56,6 +56,6 @@ See the `src/App.tsx` file for comprehensive usage examples including:
 
 ## Links
 
-- [Package on npm](https://www.npmjs.com/package/@react/carousel)
+- [Package on npm](https://www.npmjs.com/package/@soumyadeep/carousel)
 - [GitHub Repository](https://github.com/soumya100/react-carousel)
 - [Documentation](https://github.com/soumya100/react-carousel#readme)

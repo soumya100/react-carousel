@@ -221,7 +221,7 @@ function CarouselComponent<T = unknown>({
   return (
     <div
       className={cn(
-        'relative w-full outline-none',
+        'relative w-full overflow-hidden! outline-none',
         'focus-visible:ring-2 focus-visible:ring-[--color-carousel-accent]',
         'focus-visible:ring-offset-2 rounded-[--radius-carousel]',
         className
@@ -277,7 +277,7 @@ function CarouselComponent<T = unknown>({
             return (
               <div
                 key={uniqueKey}
-                className={cn('shrink-0 box-border p-1', slideClassName)}
+                className={cn('shrink-0 box-border p-1 min-w-0', slideClassName)}
                 style={{ width: slideWidth }}
                 aria-hidden={isClone ? 'true' : undefined}
               >

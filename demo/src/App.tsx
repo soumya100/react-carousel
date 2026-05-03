@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AccordionCarousel, Carousel } from '@react/carousel';
+import { AccordionCarousel, Carousel } from '@soumyadeepnandi/carousel';
 
 // Sample data type
 interface SampleItem {
@@ -23,29 +23,33 @@ const sampleItems: SampleItem[] = [
 function App() {
   const [status, setStatus] = useState<'success' | 'loading' | 'error'>('success');
   const [expanded, setExpanded] = useState(false);
+  const demoNavButtonClassName =
+    'flex h-12 w-12 items-center justify-center rounded-full border border-white/70 bg-white/95 text-gray-900 shadow-lg transition-all duration-200 hover:scale-105 hover:bg-white';
 
   const renderItem = (item: SampleItem) => (
-    <div className="relative group cursor-pointer">
-      <img
-        src={item.image}
-        alt={item.title}
-        className="w-full h-48 object-cover rounded-lg transition-transform group-hover:scale-105"
-      />
-      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
-        <h3 className="text-white font-semibold text-lg">{item.title}</h3>
+    <div className="group cursor-pointer">
+      <div className="relative overflow-hidden rounded-lg">
+        <img
+          src={item.image}
+          alt={item.title}
+          className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black/40 opacity-0 transition-opacity group-hover:opacity-100">
+          <h3 className="text-lg font-semibold text-white">{item.title}</h3>
+        </div>
       </div>
     </div>
   );
 
   const renderCardItem = (item: SampleItem) => (
-    <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+    <div className="flex h-full flex-col rounded-lg bg-white p-6 shadow-md transition-shadow hover:shadow-lg">
       <img
         src={item.image}
         alt={item.title}
-        className="w-full h-32 object-cover rounded mb-4"
+        className="mb-4 h-32 w-full rounded object-cover"
       />
-      <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
-      <p className="text-gray-600 text-sm">
+      <h3 className="mb-2 text-lg font-semibold">{item.title}</h3>
+      <p className="mt-auto text-sm text-gray-600">
         Beautiful landscape photography showcasing nature&apos;s wonders.
       </p>
     </div>
@@ -56,7 +60,7 @@ function App() {
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 py-6">
-          <h1 className="text-3xl font-bold text-gray-900">@react/carousel Demo</h1>
+          <h1 className="text-3xl font-bold text-gray-900">@soumyadeep/carousel Demo</h1>
           <p className="text-gray-600 mt-2">
             Production-grade responsive carousel - React 19 + Tailwind v4 + Radix UI
           </p>
@@ -99,9 +103,9 @@ function App() {
         </div>
 
         {/* Basic Carousel */}
-        <section>
+        <section className="min-w-0">
           <h2 className="text-2xl font-bold mb-6">Basic Carousel</h2>
-          <div className="bg-white p-6 rounded-lg shadow-sm">
+          <div className="min-w-0 rounded-lg bg-white p-6 shadow-sm">
             <Carousel<SampleItem>
               items={sampleItems}
               renderItem={renderItem}
@@ -111,14 +115,16 @@ function App() {
               infinite
               showDots
               showNavigation
+              prevButtonClassName={demoNavButtonClassName}
+              nextButtonClassName={demoNavButtonClassName}
             />
           </div>
         </section>
 
         {/* Card Carousel */}
-        <section>
+        <section className="min-w-0">
           <h2 className="text-2xl font-bold mb-6">Card Carousel</h2>
-          <div className="bg-white p-6 rounded-lg shadow-sm">
+          <div className="min-w-0 rounded-lg bg-white p-6 shadow-sm">
             <Carousel<SampleItem>
               items={sampleItems}
               renderItem={renderCardItem}
@@ -128,14 +134,16 @@ function App() {
               infinite
               showDots
               showNavigation
+              prevButtonClassName={demoNavButtonClassName}
+              nextButtonClassName={demoNavButtonClassName}
             />
           </div>
         </section>
 
         {/* Accordion Carousel */}
-        <section>
+        <section className="min-w-0">
           <h2 className="text-2xl font-bold mb-6">Accordion Carousel</h2>
-          <div className="bg-white p-6 rounded-lg shadow-sm">
+          <div className="min-w-0 rounded-lg bg-white p-6 shadow-sm">
             <div className="mb-4">
               <label className="flex items-center gap-2">
                 <input
@@ -161,9 +169,9 @@ function App() {
         </section>
 
         {/* Custom Styling */}
-        <section>
+        <section className="min-w-0">
           <h2 className="text-2xl font-bold mb-6">Custom Styling</h2>
-          <div className="bg-white p-6 rounded-lg shadow-sm">
+          <div className="min-w-0 rounded-lg bg-white p-6 shadow-sm">
             <Carousel<SampleItem>
               items={sampleItems.slice(0, 4)}
               renderItem={renderItem}
@@ -174,10 +182,10 @@ function App() {
               showDots
               showNavigation
               className="border-2 border-blue-500 rounded-xl"
-              viewportClassName="p-8"
-              slideClassName="mx-2"
-              prevButtonClassName="bg-blue-500 hover:bg-blue-600 text-white"
-              nextButtonClassName="bg-blue-500 hover:bg-blue-600 text-white"
+              viewportClassName="px-8 py-6"
+              slideClassName="px-2"
+              prevButtonClassName={`${demoNavButtonClassName} bg-blue-500 text-white border-blue-400 hover:bg-blue-600`}
+              nextButtonClassName={`${demoNavButtonClassName} bg-blue-500 text-white border-blue-400 hover:bg-blue-600`}
               dotsContainerClassName="mt-8"
               dotClassName="bg-blue-200"
               activeDotClassName="bg-blue-500 scale-125"
@@ -186,9 +194,9 @@ function App() {
         </section>
 
         {/* Empty State */}
-        <section>
+        <section className="min-w-0">
           <h2 className="text-2xl font-bold mb-6">Empty State</h2>
-          <div className="bg-white p-6 rounded-lg shadow-sm">
+          <div className="min-w-0 rounded-lg bg-white p-6 shadow-sm">
             <Carousel<SampleItem>
               items={[]}
               renderItem={renderItem}
@@ -204,13 +212,13 @@ function App() {
       <footer className="bg-white border-t mt-16">
         <div className="max-w-7xl mx-auto px-4 py-8">
           <div className="text-center text-gray-600">
-            <p className="mb-2">Built with love using @react/carousel</p>
+            <p className="mb-2">Built with love using @soumyadeep/carousel</p>
             <p className="text-sm">
               <a href="https://github.com/soumya100/react-carousel" className="text-blue-500 hover:underline">
                 View on GitHub
               </a>
               {' | '}
-              <a href="https://www.npmjs.com/package/@react/carousel" className="text-blue-500 hover:underline">
+              <a href="https://www.npmjs.com/package/@soumyadeep/carousel" className="text-blue-500 hover:underline">
                 View on npm
               </a>
             </p>

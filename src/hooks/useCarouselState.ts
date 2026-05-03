@@ -8,7 +8,7 @@ interface UseCarouselStateProps {
 }
 
 interface UseCarouselStateReturn {
-  trackRef: RefObject<HTMLDivElement | null>;
+  trackRef: RefObject<HTMLDivElement>;
   extendedItems: unknown[];
   totalExtended: number;
   translatePercent: number;
@@ -51,13 +51,21 @@ export function useCarouselState({
 
   const totalExtended = extendedItems.length;
 
-  const [realPageIndex, setRealPageIndex] = useState<number>(0);
+  const [pageIndex, setPageIndex] = useState<number>(0);
   const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
   const [disableTransition, setDisableTransition] = useState<boolean>(false);
 
+  const realPageIndex = useMemo(
+    () =>
+      totalRealPages > 0
+        ? ((pageIndex % totalRealPages) + totalRealPages) % totalRealPages
+        : 0,
+    [pageIndex, totalRealPages]
+  );
+
   const extendedIndex = isInfinite
-    ? realPageIndex * visibleSlides + visibleSlides
-    : realPageIndex * visibleSlides;
+    ? (pageIndex + 1) * visibleSlides
+    : pageIndex * visibleSlides;
 
   const translatePercent =
     totalExtended > 0 ? (extendedIndex * 100) / totalExtended : 0;
@@ -65,22 +73,18 @@ export function useCarouselState({
   const next = useCallback(() => {
     if (isTransitioning) return;
     setIsTransitioning(true);
-    setRealPageIndex((prev) =>
-      isInfinite
-        ? (prev + 1) % totalRealPages
-        : Math.min(prev + 1, totalRealPages - 1)
+    setPageIndex((prev) =>
+      isInfinite ? prev + 1 : Math.min(prev + 1, totalRealPages - 1)
     );
   }, [isTransitioning, isInfinite, totalRealPages]);
 
   const prev = useCallback(() => {
     if (isTransitioning) return;
     setIsTransitioning(true);
-    setRealPageIndex((prev) =>
-      isInfinite
-        ? (prev - 1 + totalRealPages) % totalRealPages
-        : Math.max(prev - 1, 0)
+    setPageIndex((prev) =>
+      isInfinite ? prev - 1 : Math.max(prev - 1, 0)
     );
-  }, [isTransitioning, isInfinite, totalRealPages]);
+  }, [isTransitioning, isInfinite]);
 
   const goToPage = useCallback(
     (idx: number) => {
@@ -88,7 +92,7 @@ export function useCarouselState({
       const clamped = Math.max(0, Math.min(idx, totalRealPages - 1));
       if (clamped === realPageIndex) return;
       setIsTransitioning(true);
-      setRealPageIndex(clamped);
+      setPageIndex(clamped);
     },
     [isTransitioning, realPageIndex, totalRealPages]
   );
@@ -100,15 +104,22 @@ export function useCarouselState({
         setIsTransitioning(false);
         return;
       }
-      setDisableTransition(true);
-      requestAnimationFrame(() => {
+
+      if (pageIndex < 0 || pageIndex >= totalRealPages) {
+        setDisableTransition(true);
+        setPageIndex(pageIndex < 0 ? totalRealPages - 1 : 0);
         requestAnimationFrame(() => {
-          setDisableTransition(false);
-          setIsTransitioning(false);
+          requestAnimationFrame(() => {
+            setDisableTransition(false);
+            setIsTransitioning(false);
+          });
         });
-      });
+        return;
+      }
+
+      setIsTransitioning(false);
     },
-    [isInfinite]
+    [isInfinite, pageIndex, totalRealPages]
   );
 
   return {

@@ -54,7 +54,7 @@ export function CarouselDots({
               if (e.key === 'ArrowLeft') onPageChange(Math.max(idx - 1, 0));
             }}
             className={cn(
-              'size-2 rounded-full border-0 p-0 cursor-pointer',
+              'w-2 h-2 rounded-full border-0 p-0 cursor-pointer',
               'bg-[--color-carousel-border]',
               'transition-[background-color,transform] duration-200',
               'focus-visible:outline-2 focus-visible:outline-offset-2',

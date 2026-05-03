@@ -3,7 +3,7 @@
 [![npm version](https://badge.fury.io/js/%40react%2Fcarousel.svg)](https://www.npmjs.com/package/@react/carousel)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Production-grade responsive carousel — React 19 + Tailwind v4 + Radix UI
+Production-grade responsive carousel — React 18 + Tailwind v4 + Radix UI
 
 **[View Live Demo](https://react-carousel-demo.vercel.app) | [GitHub](https://github.com/soumya100/react-carousel) | [Report a Bug](https://github.com/soumya100/react-carousel/issues)**
 

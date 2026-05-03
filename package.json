@@ -1,13 +1,16 @@
 {
-  "name": "@react/carousel",
+  "name": "@soumyadeepnandi/carousel",
   "version": "1.0.0",
-  "description": "Production-grade responsive carousel - React 19 + Tailwind v4 + Radix UI",
-  "author": "Your Name <you@yourorg.com>",
+  "description": "Production-grade responsive carousel - React 18 + Tailwind v4 + Radix UI",
+  "author": "Soumyadeep Nandi <soumyadeep.nandi@gmail.com>",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.esm.js",
   "types": "./dist/index.d.ts",
+  "publishConfig": {
+  "access": "public"
+},
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

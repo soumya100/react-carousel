@@ -65,11 +65,11 @@ export function NavButton({
       disabled={disabled}
       aria-label={direction === 'prev' ? 'Previous slide' : 'Next slide'}
       className={cn(
-        'absolute top-1/2 -translate-y-1/2 z-10',
+        'absolute top-1/2 -translate-y-1/2 z-20',
         direction === 'prev' ? 'left-0' : 'right-0',
-        'flex items-center justify-center size-8 rounded-full',
-        'bg-[--color-carousel-bg] border border-[--color-carousel-border]',
-        'text-[--color-carousel-fg] shadow-sm',
+        'flex items-center justify-center w-8 h-8 rounded-full',
+        'bg-[--color-carousel-accent] border border-transparent',
+        'text-[--color-carousel-accent-fg] shadow-lg',
         'transition-opacity duration-150 hover:opacity-80',
         'focus-visible:outline-2 focus-visible:outline-offset-2',
         'focus-visible:outline-[--color-carousel-accent]',
